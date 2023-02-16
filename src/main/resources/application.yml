@@ -1,0 +1,3 @@
+api:
+  uri: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
+  key: FX6ZW3LKVX3KXT2ZMTCLST9VT
