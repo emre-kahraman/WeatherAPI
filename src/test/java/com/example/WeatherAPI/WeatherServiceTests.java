@@ -1,8 +1,8 @@
 package com.example.WeatherAPI;
 
-import com.example.WeatherAPI.controller.WeatherController;
 import com.example.WeatherAPI.model.WeatherDTO;
 import com.example.WeatherAPI.model.WeatherRequest;
+import com.example.WeatherAPI.service.WeatherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,16 +14,16 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class WeatherApiIntegrationTests {
+public class WeatherServiceTests {
 
     @Autowired
-    WeatherController weatherController;
+    WeatherService weatherService;
 
     @Test
     public void itShouldReturnDailyWeather(){
         WeatherRequest weatherRequest = WeatherRequest.builder().city("london").country("england").build();
 
-        ResponseEntity<WeatherDTO> responseEntity = weatherController.getDailyWeather(weatherRequest);
+        ResponseEntity<WeatherDTO> responseEntity = weatherService.getDailyWeather(weatherRequest);
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(responseEntity.getBody().getResolvedAddress().toLowerCase().contains(weatherRequest.getCity()), true);
@@ -34,7 +34,7 @@ public class WeatherApiIntegrationTests {
     public void itShouldReturnWeeklyWeather(){
         WeatherRequest weatherRequest = WeatherRequest.builder().city("london").country("england").build();
 
-        ResponseEntity<WeatherDTO> responseEntity = weatherController.getWeeklyWeather(weatherRequest);
+        ResponseEntity<WeatherDTO> responseEntity = weatherService.getWeeklyWeather(weatherRequest);
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(responseEntity.getBody().getResolvedAddress().toLowerCase().contains(weatherRequest.getCity()), true);
@@ -45,7 +45,7 @@ public class WeatherApiIntegrationTests {
     public void itShouldReturnMonthlyWeather(){
         WeatherRequest weatherRequest = WeatherRequest.builder().city("london").country("england").build();
 
-        ResponseEntity<WeatherDTO> responseEntity = weatherController.getMonthlyWeather(weatherRequest);
+        ResponseEntity<WeatherDTO> responseEntity = weatherService.getMonthlyWeather(weatherRequest);
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(responseEntity.getBody().getResolvedAddress().toLowerCase().contains(weatherRequest.getCity()), true);
